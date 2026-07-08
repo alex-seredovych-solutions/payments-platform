@@ -17,3 +17,7 @@ class AuthorizationService:
     def processor_callback(self, auth_id, state):
         self.db.run('UPDATE authorizations SET status=? WHERE auth_id=?',(state,auth_id))
         self.bus.publish('payment.authorization_updated',auth_id=auth_id,status=state)
+
+
+def authorization_audit_fields(intent_id, auth_id):
+    return {'intent_id': intent_id, 'auth_id': auth_id, 'operation_type':'AUTHORIZE'}
