@@ -20,3 +20,7 @@ class CouponService:
 
     def redemption_count(self,code):
         return self.db.one('SELECT COUNT(*) AS n FROM coupon_usage WHERE code=?',(code,))['n']
+
+
+def redemption_guard_key(order_id, coupon_code):
+    return f'{order_id}:{coupon_code}'
