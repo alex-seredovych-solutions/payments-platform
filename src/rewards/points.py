@@ -22,3 +22,7 @@ class PointsService:
         self.db.run('UPDATE point_accounts SET points=points+? WHERE customer_id=?',(delta,customer_id))
         self.db.run('INSERT INTO point_journal VALUES (?,?,?,?,?)',
                     (self.db.new_id('PNT'),customer_id,order_id,delta,reason))
+
+
+def point_adjustment_reference(order_id, reason, sequence):
+    return f'{order_id}:POINTS:{reason}:{sequence}'
