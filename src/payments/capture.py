@@ -27,3 +27,8 @@ class CaptureService:
     def on_pack_verified(self, event):
         if self.settings.capture_after_pack_verified:
             self.capture_full_order(event.payload['order_id'])
+
+
+def candidate_capture_allocation(order_amount_cents, per_package_weights):
+    from acme_shared.money import allocate_proportionally
+    return allocate_proportionally(order_amount_cents, per_package_weights)
