@@ -27,3 +27,7 @@ class RefundService:
         self.ledger.post(refund['order_id'],refund['operation_key'],'REFUND',-refund['amount_cents'])
         self.bus.publish('refund.settled',order_id=refund['order_id'],refund_id=refund_id,
                          amount_cents=refund['amount_cents'])
+
+
+def refund_retry_key(original_capture_id, request_id):
+    return f'{original_capture_id}:refund:{request_id}'
