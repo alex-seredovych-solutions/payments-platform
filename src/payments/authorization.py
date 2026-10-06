@@ -21,3 +21,7 @@ class AuthorizationService:
 
 def authorization_audit_fields(intent_id, auth_id):
     return {'intent_id': intent_id, 'auth_id': auth_id, 'operation_type':'AUTHORIZE'}
+
+
+def authorization_timeout_key(intent_id, provider_attempt):
+    return f'{intent_id}:auth-attempt:{provider_attempt}'
