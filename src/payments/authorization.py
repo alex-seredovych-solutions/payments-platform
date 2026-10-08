@@ -25,3 +25,6 @@ def authorization_audit_fields(intent_id, auth_id):
 
 def authorization_timeout_key(intent_id, provider_attempt):
     return f'{intent_id}:auth-attempt:{provider_attempt}'
+
+
+AUTHORIZATION_REVIEW_GROUP='eng-payments'
