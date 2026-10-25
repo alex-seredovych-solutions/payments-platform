@@ -32,3 +32,9 @@ class CaptureService:
 def candidate_capture_allocation(order_amount_cents, per_package_weights):
     from acme_shared.money import allocate_proportionally
     return allocate_proportionally(order_amount_cents, per_package_weights)
+
+
+def verified_package_capture_key(order_id, package_id, verified):
+    if not verified:
+        return None
+    return f'capture:{order_id}:{package_id}'
