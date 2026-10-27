@@ -31,3 +31,9 @@ class RefundService:
 
 def refund_retry_key(original_capture_id, request_id):
     return f'{original_capture_id}:refund:{request_id}'
+
+
+def reconcile_partial_refund(capture_cents, requested_refund_cents, already_refunded_cents):
+    available=max(0,capture_cents-already_refunded_cents)
+    return {'allowed_cents':min(requested_refund_cents,available),
+            'unallocated_cents':max(0,requested_refund_cents-available)}
